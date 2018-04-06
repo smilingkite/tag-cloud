@@ -3,7 +3,7 @@
     <div class="holder">
 
       <form @submit.prevent="addTags">
-        <input type="text" placeholder="Enter text" v-model="tag" v-validate="'min:5'" name="tag">
+        <textarea placeholder="Enter text" v-model="tag" v-validate="'min:5'" name="tag"></textarea>
 
         <transition name="alert-in" enter-active-class="animated flipInX" leave-active-class="animated flipOutX">
           <p class="alert" v-if="errors.has('tag')">{{ errors.first('tag') }}</p>
@@ -82,7 +82,7 @@ export default {
   .container {
     box-shadow: 0px 0px 40px lightgray;
   }
-  input {
+  textarea {
     width: calc(100% - 40px);
     border: 0;
     padding: 20px;
