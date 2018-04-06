@@ -1,9 +1,11 @@
+import AutoSizeTextArea from './AutoSizeTextArea.vue'
+
 <template>
   <div class="hello">
     <div class="holder">
 
       <form @submit.prevent="addTags">
-        <textarea placeholder="Enter text" v-model="tag" v-validate="'min:5'" name="tag"></textarea>
+        <AutoSizeTextArea placeholder="Enter text" v-model="tag" v-validate="'min:5'" name="tag"></AutoSizeTextArea>
 
         <transition name="alert-in" enter-active-class="animated flipInX" leave-active-class="animated flipOutX">
           <p class="alert" v-if="errors.has('tag')">{{ errors.first('tag') }}</p>

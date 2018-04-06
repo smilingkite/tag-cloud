@@ -6,6 +6,7 @@
 
 <script>
 import Tags from './components/Tags.vue'
+
 export default {
   name: 'app',
   components: {
