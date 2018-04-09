@@ -1,55 +1,20 @@
-import AutoSizeTextArea from './AutoSizeTextArea.vue'
-
 <template>
-  <div class="hello">
-    <div class="holder">
-
-      <form @submit.prevent="addTags">
-        <AutoSizeTextArea placeholder="Enter text" v-model="tag" v-validate="'min:5'" name="tag"></AutoSizeTextArea>
-
-        <transition name="alert-in" enter-active-class="animated flipInX" leave-active-class="animated flipOutX">
-          <p class="alert" v-if="errors.has('tag')">{{ errors.first('tag') }}</p>
-        </transition>
-      </form>
-
-      <ul>
-        <transition-group name="list" enter-active-class="animated bounceInUp" leave-active-class="animated bounceOutDown">
-          <li v-for="(data, index) in tags" :key='index'>
-            {{ data.tag }}
-            <i class="fa fa-minus-circle" v-on:click="remove(index)"></i>
-          </li>
-        </transition-group>
-      </ul>
-
-    </div>
+  <div>
+    <b-form-textarea id="textarea1"
+                     v-model="text"
+                     placeholder="Enter something"
+                     :rows="3"
+                     :max-rows="6">
+    </b-form-textarea>
+    <pre class="mt-3">{{ text }}</pre>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Tags',
-  data() {
+  data () {
     return {
-      tag: '',
-      tags: [
-        { "tag": "Vue.js"},
-        { "tag": "Frontend Developer"}
-      ]
-    }
-  },
-  methods: {
-    addTags() {
-      this.$validator.validateAll().then((result) => {
-        if (result) {
-          this.tags.push({tag: this.tag})
-          this.tag = '';
-        } else {
-          console.log('Not valid');
-        }
-      })
-    },
-    remove(id) {
-      this.tags.splice(id,1);
+      text: ''
     }
   }
 }
