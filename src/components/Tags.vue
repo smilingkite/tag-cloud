@@ -5,6 +5,7 @@
                       v-model="text"
                       placeholder="Enter something"
                       :rows="3"
+                      :max-rows="10"
       >
       </b-form-textarea>
       <button class="button">submit</button>
@@ -26,16 +27,6 @@ export default {
       count: 1,  
     }
   },
-  // watch: {
-  //   increment () {
-  //     this.count++;
-  //   },
-  //   decrement () {
-  //     if(this.count > 0){
-  //       this.count-- ;
-  //     }
-  //   }
-  // },
   methods: {
     filterText: function(e) {
       e.preventDefault();
@@ -76,16 +67,10 @@ export default {
         })
       }
       function maxTags (tagArray, c = count) {
-        console.log(count)
-
         if (tagArray.length < 10) return tagArray
         tagArray = tagArray.filter(tagObject => {
-          console.log('/////count')
           return tagObject.count > c 
         })
-        // if (tagArray.length > 50) {
-        //   return maxTags(tagArray, count++)
-        // }
         return tagArray
       }
       this.tags = maxTags(filterTags(toTags(this.tags)))
@@ -129,7 +114,11 @@ export default {
   p {
     text-align:center;
     padding: 30px 0;
-    color: gray;
+    /* color: gray; */
+  }
+  button.button {
+    margin: 1em auto;
+    display:block 
   }
   .container {
     box-shadow: 0px 0px 40px lightgray;
