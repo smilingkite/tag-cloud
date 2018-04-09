@@ -14,28 +14,6 @@
 </template>
 
 <script>
-// var filteredText = text.replace(/[.,\/#!?$\'\"%\^&\*;:{}=\-_`~()]/g, ' ').replace(/\s+/g, ' ').toLowerCase()
-// var words = filteredText.split(' ')
-// function toTags (array) {
-//   array.sort()
-//   var tagArray = Object.values(array.reduce((resultTagArr, tag) => {
-//     if (!resultTagArr[tag]) {
-//       resultTagArr[tag] = {name: tag, count: 1}
-//       // gives array of named objects: tagName: {name: tag, count: 1}
-//     } else { resultTagArr[tag]['count'] += 1 }
-
-//     return resultTagArr
-//   }, {}))
-
-//   return tagArray
-// }
-
-// function filterTags (tagArray) {
-//   var commonWords = ['a', 'and', 'be', 'is', 'are', 'but', 'the', 'an', 'if', 'that', 'this', 'it', 'so', 't', 'don', 'of', 'is', 'to']
-//   return tagArray.filter(tagObject => {
-//     return !commonWords.includes(tagObject.name)
-//   })
-// }
 export default {
   data () {
     return {
@@ -46,9 +24,27 @@ export default {
   methods: {
     filterText: function(e) {
       e.preventDefault();
-      console.log('inside filterText method', this.text)
       var filteredText = this.text.replace(/[.,\/#!?$\'\"%\^&\*;:{}=\-_`~()]/g, ' ').replace(/\s+/g, ' ').toLowerCase()
       this.words = filteredText.split(' ')
+      function toTags (array) {
+        array.sort()
+        var tagArray = Object.values(array.reduce((resultTagArr, tag) => {
+          if (!resultTagArr[tag]) {
+            resultTagArr[tag] = {name: tag, count: 1}
+            // gives array of named objects: tagName: {name: tag, count: 1}
+          } else { resultTagArr[tag]['count'] += 1 }
+
+          return resultTagArr
+        }, {}))
+        return tagArray
+      }
+      function filterTags (tagArray) {
+        var commonWords = ['', 'a', 'and', 'be', 'is', 'are', 'but', 'the', 'an', 'if', 'that', 'this', 'it', 'so', 't', 'don', 'of', 'is', 'to']
+        return tagArray.filter(tagObject => {
+          return !commonWords.includes(tagObject.name)
+        })
+      }
+      this.words = filterTags(toTags(this.words))
     }
   }
 }
