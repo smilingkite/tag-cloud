@@ -9,11 +9,10 @@
       </b-form-textarea>
       <button class="button">submit</button>
     </form>
-    <p>Minimum amount of word usage # {{ count }}</p>
-    <button v-on:click.prevent="increment">+</button>
-    <button v-on:click.prevent="decrement">-</button>
+    <p>Minimum amount of word usage # <button v-on:click.prevent="increment">+</button> {{ count }} <button v-on:click.prevent="decrement">-</button></p>
+    
     <ul class="tags">
-      <li v-for="tag in tags" :key="tag.id" v-bind:style="{fontSize: 1 + tag.count/5  + 'em'}" >{{tag.name}}</li>
+      <li v-for="tag in tags" :key="tag.id" v-bind:style="{fontSize: 1 + tag.count/5  + 'em'}" > {{tag.name}} </li>
     </ul>
   </div>
 </template>
