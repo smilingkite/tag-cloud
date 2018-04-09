@@ -9,6 +9,9 @@
       </b-form-textarea>
       <button class="button">submit</button>
     </form>
+    <p>Minimum amount of word usage # {{ count }}</p>
+    <button v-on:click.prevent="increment">+</button>
+    <button v-on:click.prevent="decrement">-</button>
     <ul class="tags">
       <li v-for="tag in tags" :key="tag.id" v-bind:style="{fontSize: 1 + tag.count/5  + 'em'}" >{{tag.name}}</li>
     </ul>
@@ -20,19 +23,26 @@ export default {
   data () {
     return {
       text: '',
-      tags: []  
+      tags: [],
+      count: 1,  
     }
   },
-  computed: {
-    tagCount: function(count){
-      return 'tag' + count
-    }
-  },
+  // watch: {
+  //   increment () {
+  //     this.count++;
+  //   },
+  //   decrement () {
+  //     if(this.count > 0){
+  //       this.count-- ;
+  //     }
+  //   }
+  // },
   methods: {
     filterText: function(e) {
       e.preventDefault();
-      var filteredText = this.text.replace(/[.,\/#!?$\'\"%\^&\*;:{}=\-_`~()]/g, ' ').replace(/\s+/g, ' ').toLowerCase()
+      var filteredText = this.text.replace(/[.,\/#!?\“—–\”$\'\"%\^&\*;:{}=\-_`~()0-9]/g, ' ').replace(/\s+/g, ' ').toLowerCase()
       this.tags = filteredText.split(' ')
+      let count = this.count
       function toTags (array) {
         array.sort()
         var tagArray = Object.values(array.reduce((resultTagArr, tag) => {
@@ -47,21 +57,47 @@ export default {
       }
       function filterTags (tagArray) {
         var commontags = ['', 
-        'a',  'an', 'and', 'as', 'are', 
+        'a',  'an', 'and', 'as', 'are', 'at',
         'but', 'be', 'by',
         'don', 
+        'every',
         'for', 
+        'had', 'has', 'have',
         'is', 'in', 'it', 'if', 'i',
-        'of', 'on',
+        'like',
+        'me', 'my',
+        'of', 'on', 'or',
         'so',
         'the',  'that', 'this', 'to', 't', 'then',
-        'you', 'your'
+        'you', 'your',
+        'what', 'which', 'with', 'was', 'were'
         ]
         return tagArray.filter(tagObject => {
           return !commontags.includes(tagObject.name)
         })
       }
-      this.tags = filterTags(toTags(this.tags))
+      function maxTags (tagArray, c = count) {
+        console.log(count)
+
+        if (tagArray.length < 10) return tagArray
+        tagArray = tagArray.filter(tagObject => {
+          console.log('/////count')
+          return tagObject.count > c 
+        })
+        // if (tagArray.length > 50) {
+        //   return maxTags(tagArray, count++)
+        // }
+        return tagArray
+      }
+      this.tags = maxTags(filterTags(toTags(this.tags)))
+    },
+    increment () {
+      this.count++;
+    },
+    decrement () {
+      if(this.count > 0){
+        this.count-- ;
+      }
     }
   }
 }
@@ -69,7 +105,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-/* @import "https://cdn.jsdelivr.net/npm/animate.css@3.5.1"; */
+
 @import "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"; 
 
   ul {
