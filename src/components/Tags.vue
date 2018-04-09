@@ -9,7 +9,7 @@
       </b-form-textarea>
       <button class="button">submit</button>
     </form>
-    <pre class="mt-3">{{ words }}</pre>
+    <pre class="mt-3">{{ tags }}</pre>
   </div>
 </template>
 
@@ -18,14 +18,14 @@ export default {
   data () {
     return {
       text: '',
-      words: []  
+      tags: []  
     }
   },
   methods: {
     filterText: function(e) {
       e.preventDefault();
       var filteredText = this.text.replace(/[.,\/#!?$\'\"%\^&\*;:{}=\-_`~()]/g, ' ').replace(/\s+/g, ' ').toLowerCase()
-      this.words = filteredText.split(' ')
+      this.tags = filteredText.split(' ')
       function toTags (array) {
         array.sort()
         var tagArray = Object.values(array.reduce((resultTagArr, tag) => {
@@ -39,12 +39,22 @@ export default {
         return tagArray
       }
       function filterTags (tagArray) {
-        var commonWords = ['', 'a', 'and', 'be', 'is', 'are', 'but', 'the', 'an', 'if', 'that', 'this', 'it', 'so', 't', 'don', 'of', 'is', 'to']
+        var commontags = ['', 
+        'a',  'an', 'and', 'as', 'are', 
+        'but', 'be', 'by',
+        'don', 
+        'for', 
+        'is', 'in', 'it', 'if', 'i',
+        'of', 'on',
+        'so',
+        'the',  'that', 'this', 'to', 't', 'then',
+        'you', 'your'
+        ]
         return tagArray.filter(tagObject => {
-          return !commonWords.includes(tagObject.name)
+          return !commontags.includes(tagObject.name)
         })
       }
-      this.words = filterTags(toTags(this.words))
+      this.tags = filterTags(toTags(this.tags))
     }
   }
 }
