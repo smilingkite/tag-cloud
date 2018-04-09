@@ -1,12 +1,15 @@
 <template>
   <div>
-    <b-form-textarea id="textarea1"
-                     v-model="text"
-                     placeholder="Enter something"
-                     :rows="3"
-    >
-    </b-form-textarea>
-    <pre class="mt-3">{{ filteredText }}</pre>
+    <form method="post" v-on:submit="filterText">
+      <b-form-textarea id="textarea1"
+                      v-model="text"
+                      placeholder="Enter something"
+                      :rows="3"
+      >
+      </b-form-textarea>
+      <button class="button">submit</button>
+    </form>
+    <pre class="mt-3">{{ words }}</pre>
   </div>
 </template>
 
@@ -37,14 +40,16 @@ export default {
   data () {
     return {
       text: '',
-      filteredText: ''  
+      words: []  
     }
   },
-  computed: {
-    // filterText() {
-    //   console.log('inside filterText method', this.text)
-    //   this.filteredText = this.text.replace(/[.,\/#!?$\'\"%\^&\*;:{}=\-_`~()]/g, ' ').replace(/\s+/g, ' ').toLowerCase()
-    // }
+  methods: {
+    filterText: function(e) {
+      e.preventDefault();
+      console.log('inside filterText method', this.text)
+      var filteredText = this.text.replace(/[.,\/#!?$\'\"%\^&\*;:{}=\-_`~()]/g, ' ').replace(/\s+/g, ' ').toLowerCase()
+      this.words = filteredText.split(' ')
+    }
   }
 }
 </script>
