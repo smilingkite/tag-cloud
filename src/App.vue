@@ -6,14 +6,11 @@
 
 <script>
 import Tags from './components/Tags.vue'
-import AutoSizeTextArea from './components/AutoSizeTextArea.vue'
 
 export default {
   name: 'app',
   components: {
     Tags,
-    AutoSizeTextArea
-    
   }
 }
 </script>
