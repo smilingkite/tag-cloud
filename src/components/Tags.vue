@@ -41,10 +41,10 @@ export default {
     }
   },
   computed: {
-    filterText() {
-      console.log('inside filterText method', this.text)
-      this.filteredText = this.text.replace(/[.,\/#!?$\'\"%\^&\*;:{}=\-_`~()]/g, ' ').replace(/\s+/g, ' ').toLowerCase()
-    }
+    // filterText() {
+    //   console.log('inside filterText method', this.text)
+    //   this.filteredText = this.text.replace(/[.,\/#!?$\'\"%\^&\*;:{}=\-_`~()]/g, ' ').replace(/\s+/g, ' ').toLowerCase()
+    // }
   }
 }
 </script>
