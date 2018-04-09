@@ -13,7 +13,7 @@
     "vue": "^2.5.13"
   },
   "deploy": {
-    "key": "npm run build; push-dir --dir=dist --branch=gh-pages --cleanup"
+    "key": "npm run build; push-dir --dir=dist --branch=master --cleanup"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.0.0-beta.6",
