@@ -29,7 +29,7 @@
   }
   p {
     text-align:center;
-    padding: 30px 0;
+    padding: 10px 0 20px;
   }
 
 </style>
