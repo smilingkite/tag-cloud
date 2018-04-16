@@ -46,7 +46,6 @@ function maxTags (tagArray, c) {
 
 export default new Vuex.Store({
  state: {
-  text: '',
   tags: [],
   count: 1, 
  },
