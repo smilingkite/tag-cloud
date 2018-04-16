@@ -1,8 +1,5 @@
 <template>
   <div>
-    <submitText></submitText>
-    <incrementdecrement></incrementdecrement>
-    
     <ul class="tags">
       <li v-for="tag in tags" :key="tag.id" v-bind:style="{fontSize: 1 + tag.count/5  + 'em'}" > {{tag.name}} </li>
     </ul>
@@ -10,13 +7,8 @@
 </template>
 
 <script>
-import incrementdecrement from './incrementdecrement'
-import submitText from './submitText'
+
 export default {
-  components: {
-    incrementdecrement,
-    submitText
-  },
   computed: {
     tags(){
       return this.$store.getters.tags
@@ -49,24 +41,4 @@ export default {
     margin-bottom: 2px;
     display: inline-block;
   }
-  p {
-    text-align:center;
-    padding: 30px 0;
-  }
-  button.button {
-    margin: 1em auto;
-    display:block 
-  }
-  .container {
-    box-shadow: 0px 0px 40px lightgray;
-  }
-  textarea {
-    width: calc(100%);
-    border: 0;
-    padding: 20px;
-    font-size: 1.3em;
-    background-color: #323333;
-    color: #687F7F;
-  }
-
 </style>

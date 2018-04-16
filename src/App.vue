@@ -1,16 +1,22 @@
 <template>
   <div id="app">
+    <submitText></submitText>
+    <incrementdecrement></incrementdecrement>
     <Tags></Tags>
   </div>
 </template>
 
 <script>
 import Tags from './components/Tags.vue'
+import incrementdecrement from './components/incrementdecrement'
+import submitText from './components/submitText'
 
 export default {
   name: 'app',
   components: {
     Tags,
+    incrementdecrement,
+    submitText
   }
 }
 </script>
@@ -30,7 +36,8 @@ body, html {
   height: 100%;
 }
 #app {
-    width: 50%;
+  width: 50%;
+  box-shadow: 0px 0px 40px lightgray;
 }
 
 </style>
