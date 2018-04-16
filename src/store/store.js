@@ -59,14 +59,21 @@ export default new Vuex.Store({
   },
   INCREMENT (state) {
     state.count++;
+    state.tags = maxTags(state.tags, state.count)
   },
   DECREMENT (state) {
     if(state.count > 0){
       state.count-- ;
+      // state.tags = maxTags(state.tags, state.count)
     }
   },
   FILTER_TAG (state, tag) {
+    var count = state.count
+    var tags = state.tags
+    var commontags = state.commontags
     state.commontags.push(tag)
+    var tags = maxTags(filterTags(tags, commontags), count)
+    state.tags = tags
   }
  },
  actions: {
