@@ -10,11 +10,7 @@
       </b-form-textarea>
       <button class="button">submit</button>
     </form>
-    <p>Minimum amount of word usage # 
-      <button v-on:click="$store.dispatch('increment')">+</button>
-       {{ newCount }} 
-      <button v-on:click.prevent="$store.dispatch('decrement')">-</button>
-    </p>
+    <incrementdecrement></incrementdecrement>
     
     <ul class="tags">
       <li v-for="tag in tags" :key="tag.id" v-bind:style="{fontSize: 1 + tag.count/5  + 'em'}" > {{tag.name}} </li>
@@ -23,7 +19,11 @@
 </template>
 
 <script>
+import incrementdecrement from './incrementdecrement'
 export default {
+  components: {
+    incrementdecrement
+  },
   data () {
     return {
       text: '',
@@ -40,9 +40,6 @@ export default {
 
   },
   computed: {
-    newCount(){
-      return this.$store.getters.count
-    },
     tags(){
       return this.$store.getters.tags
     }
