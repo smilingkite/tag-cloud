@@ -27,62 +27,24 @@ export default {
   data () {
     return {
       text: '',
-      tags: [], 
     }
   },
   methods: {
-      filterText: function(e) {
+      filterText(e) {
       e.preventDefault();
-      var filteredText = this.text.replace(/[.,\/#!?\“—–\”$\'\"%\^&\*;:{}=\-_`~()0-9]/g, ' ').replace(/\s+/g, ' ').toLowerCase()
-      this.tags = filteredText.split(' ')
-      let count = this.newCount
-      console.log(count)
-      function toTags (array) {
-        array.sort()
-        var tagArray = Object.values(array.reduce((resultTagArr, tag) => {
-          if (!resultTagArr[tag]) {
-            resultTagArr[tag] = {name: tag, count: 1}
-            // gives array of named objects: tagName: {name: tag, count: 1}
-          } else { resultTagArr[tag]['count'] += 1 }
-          return resultTagArr
-        }, {}))
-        return tagArray
-      }
-      function filterTags (tagArray) {
-        var commontags = ['', 
-        'a',  'an', 'and', 'as', 'are', 'at',
-        'but', 'be', 'by',
-        'don', 
-        'every',
-        'for', 
-        'had', 'has', 'have',
-        'is', 'in', 'it', 'if', 'i',
-        'like',
-        'me', 'my',
-        'of', 'on', 'or',
-        'so',
-        'the',  'that', 'this', 'to', 't', 'then',
-        'you', 'your',
-        'what', 'which', 'with', 'was', 'were'
-        ]
-        return tagArray.filter(tagObject => {
-          return !commontags.includes(tagObject.name)
-        })
-      }
-      function maxTags (tagArray, c = count) {
-        if (tagArray.length < 10) return tagArray
-        tagArray = tagArray.filter(tagObject => {
-          return tagObject.count > c 
-        })
-        return tagArray
-      }
-      this.tags = maxTags(filterTags(toTags(this.tags)))
+
+      var filteredText = this.text.replace(/[.,\/#!?\“—–\”$\'\’\"%\^&\*;:{}=\-_`~()0-9]/g, ' ').replace(/\s+/g, ' ').toLowerCase()
+      var tags = filteredText.split(' ')
+      this.$store.dispatch('gettags', tags)
     },
 
   },
   computed: {
     newCount(){
       return this.$store.getters.count
+    },
+    tags(){
+      return this.$store.getters.tags
     }
   }
 }
