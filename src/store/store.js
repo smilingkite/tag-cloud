@@ -14,24 +14,7 @@ function toTags (array) {
   }, {}))
   return tagArray
 }
-function filterTags (tagArray) {
-  var commontags = ['', 
-  'a',  'an', 'and', 'as', 'are', 'at',
-  'but', 'be', 'by',
-  'can',
-  'don', 
-  'every',
-  'for', 
-  'had', 'has', 'have',
-  'is', 'in', 'it', 'if', 'i',
-  'like',
-  'me', 'my',
-  'of', 'on', 'or',
-  'so',
-  'the',  'that', 'this', 'to', 't', 'then',
-  'you', 'your',
-  'what', 'which', 'with', 'was', 'were', 'we'
-  ]
+function filterTags (tagArray, commontags) {
   return tagArray.filter(tagObject => {
     return !commontags.includes(tagObject.name)
   })
@@ -48,11 +31,30 @@ export default new Vuex.Store({
  state: {
   tags: [],
   count: 1, 
+  commontags: [
+  '', 
+  'a',  'an', 'and', 'as', 'are', 'at',
+  'but', 'be', 'by',
+  'can',
+  'don', 
+  'every',
+  'for', 
+  'had', 'has', 'have',
+  'is', 'in', 'it', 'if', 'i',
+  'like',
+  'me', 'my',
+  'of', 'on', 'or',
+  'so',
+  'the',  'that', 'this', 'to', 't', 'then',
+  'you', 'your',
+  'what', 'which', 'with', 'was', 'were', 'we'
+  ]
  },
  mutations: {
   GET_TAGS (state, tags) {
     var count = state.count
-    tags = maxTags(filterTags(toTags(tags)), count)
+    var commontags = state.commontags
+    tags = maxTags(filterTags(toTags(tags), commontags), count)
     state.tags = tags
   },
   INCREMENT (state) {
@@ -62,6 +64,9 @@ export default new Vuex.Store({
     if(state.count > 0){
       state.count-- ;
     }
+  },
+  FILTER_TAG (state, tag) {
+    state.commontags.push(tag)
   }
  },
  actions: {
@@ -73,6 +78,9 @@ export default new Vuex.Store({
   },
   decrement({commit},count){
     commit('DECREMENT', count)
+  },
+  filterTag({commit}, commontags){
+    commit('FILTER_TAG', commontags)
   }
  },
  getters: {

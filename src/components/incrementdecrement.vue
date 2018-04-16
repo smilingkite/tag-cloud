@@ -1,5 +1,5 @@
 <template>
-    <p>Minimum amount of word usage # 
+    <p>Minimum amount of tag usage # 
       <button v-on:click="$store.dispatch('increment')">+</button>
        {{ newCount }} 
       <button v-on:click.prevent="$store.dispatch('decrement')">-</button>
@@ -29,7 +29,7 @@
   }
   p {
     text-align:center;
-    padding: 30px 0;
+    padding: 10px 0 20px;
   }
 
 </style>
