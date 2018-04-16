@@ -1,20 +1,7 @@
 <template>
   <div>
-    <form method="post" v-on:submit="filterText">
-      <b-form-textarea id="textarea1"
-                      v-model="text"
-                      placeholder="Enter something"
-                      :rows="3"
-                      :max-rows="10"
-      >
-      </b-form-textarea>
-      <button class="button">submit</button>
-    </form>
-    <p>Minimum amount of word usage # 
-      <button v-on:click="$store.dispatch('increment')">+</button>
-       {{ newCount }} 
-      <button v-on:click.prevent="$store.dispatch('decrement')">-</button>
-    </p>
+    <submitText></submitText>
+    <incrementdecrement></incrementdecrement>
     
     <ul class="tags">
       <li v-for="tag in tags" :key="tag.id" v-bind:style="{fontSize: 1 + tag.count/5  + 'em'}" > {{tag.name}} </li>
@@ -23,26 +10,14 @@
 </template>
 
 <script>
+import incrementdecrement from './incrementdecrement'
+import submitText from './submitText'
 export default {
-  data () {
-    return {
-      text: '',
-    }
-  },
-  methods: {
-      filterText(e) {
-      e.preventDefault();
-
-      var filteredText = this.text.replace(/[.,\/#!?\“—–\”$\'\’\"%\^&\*;:{}=\-_`~()0-9]/g, ' ').replace(/\s+/g, ' ').toLowerCase()
-      var tags = filteredText.split(' ')
-      this.$store.dispatch('gettags', tags)
-    },
-
+  components: {
+    incrementdecrement,
+    submitText
   },
   computed: {
-    newCount(){
-      return this.$store.getters.count
-    },
     tags(){
       return this.$store.getters.tags
     }
