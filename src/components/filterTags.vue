@@ -1,7 +1,7 @@
 <template>
-  <div class="filtertags">
+  <div class="filtertags"  v-if="tags.length>0">
     <h3>Get  rid of unwanted tags</h3>
-    <table class="filtertags">
+    <table>
 
       <tr v-for="tag in tags" :key="tag.id"> <td class="tag">{{tag.name}}</td><td> <button v-on:click.prevent="$store.dispatch('filterTag', tag.name)">-</button></td></tr>
     </table>

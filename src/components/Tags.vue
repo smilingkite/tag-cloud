@@ -1,5 +1,5 @@
 <template>
-  <div class="tags">
+  <div class="tags" v-if="tags.length>0">
     <ul>
       <li v-for="tag in tags" :key="tag.id" v-bind:style="{fontSize: 1 + (tag.count-count)/5  + 'em'}" > {{tag.name}} </li>
     </ul>
@@ -12,7 +12,7 @@ export default {
   computed: {
     tags(){
       return this.$store.getters.tags
-    }, 
+    },
     count(){
       return this.$store.getters.count
     }
@@ -20,20 +20,13 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
-@import "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"; 
-
-  .tags {
-    background-color: #E0EDF4;
-    padding: 2em 0;
-  }
   ul {
     margin: 0;
-    padding: 0;
     list-style-type: none;
-
+    background-color: #E0EDF4;
+    padding: 2em 0;
     text-align: center;
     display: flex;
     align-items: center;
