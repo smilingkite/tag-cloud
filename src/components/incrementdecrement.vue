@@ -1,8 +1,9 @@
 <template>
-    <p>Minimum amount of tag usage # 
+    <p>A word is used at least  
       <button v-on:click="$store.dispatch('increment')">+</button>
        {{ newCount }} 
       <button v-on:click.prevent="$store.dispatch('decrement')">-</button>
+      times when it shows up in the tag cloud. 
     </p>
 
 </template>

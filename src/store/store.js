@@ -30,6 +30,7 @@ function maxTags (tagArray, c) {
 export default new Vuex.Store({
  state: {
   tags: [],
+  originaltags: [],
   count: 1, 
   commontags: [
   '', 
@@ -51,22 +52,36 @@ export default new Vuex.Store({
   ]
  },
  mutations: {
-  GET_TAGS (state, tags) {
+  GET_TAGS (state, payload) {
     var count = state.count
     var commontags = state.commontags
-    tags = maxTags(filterTags(toTags(tags), commontags), count)
+    var tags = maxTags(filterTags(toTags(payload), commontags), count)
     state.tags = tags
+    state.originaltags = tags
   },
   INCREMENT (state) {
     state.count++;
+    state.tags = maxTags(state.tags, state.count)
   },
   DECREMENT (state) {
     if(state.count > 0){
       state.count-- ;
+
+      var count = state.count
+      var originaltags = state.originaltags
+      var commontags = state.commontags
+
+      var tags = maxTags(filterTags(originaltags, commontags), count)
+      state.tags = tags
     }
   },
   FILTER_TAG (state, tag) {
+    var count = state.count
+    var tags = state.tags
+    var commontags = state.commontags
     state.commontags.push(tag)
+    var tags = maxTags(filterTags(tags, commontags), count)
+    state.tags = tags
   }
  },
  actions: {
