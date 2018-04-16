@@ -35,7 +35,8 @@ export default {
       e.preventDefault();
       var filteredText = this.text.replace(/[.,\/#!?\“—–\”$\'\"%\^&\*;:{}=\-_`~()0-9]/g, ' ').replace(/\s+/g, ' ').toLowerCase()
       this.tags = filteredText.split(' ')
-      let count = this.count
+      let count = this.newCount
+      console.log(count)
       function toTags (array) {
         array.sort()
         var tagArray = Object.values(array.reduce((resultTagArr, tag) => {
