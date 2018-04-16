@@ -77,9 +77,7 @@ export default {
       }
       this.tags = maxTags(filterTags(toTags(this.tags)))
     },
-    // increment(e){
-    //   this.
-    // }
+
   },
   computed: {
     newCount(){
