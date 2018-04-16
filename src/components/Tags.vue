@@ -114,7 +114,6 @@ export default {
   p {
     text-align:center;
     padding: 30px 0;
-    /* color: gray; */
   }
   button.button {
     margin: 1em auto;
