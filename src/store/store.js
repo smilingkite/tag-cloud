@@ -51,10 +51,10 @@ export default new Vuex.Store({
   ]
  },
  mutations: {
-  GET_TAGS (state, tags) {
+  GET_TAGS (state, payload) {
     var count = state.count
     var commontags = state.commontags
-    tags = maxTags(filterTags(toTags(tags), commontags), count)
+    var tags = maxTags(filterTags(toTags(payload), commontags), count)
     state.tags = tags
   },
   INCREMENT (state) {
