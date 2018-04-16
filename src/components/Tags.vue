@@ -34,13 +34,8 @@ export default {
       e.preventDefault();
 
       var filteredText = this.text.replace(/[.,\/#!?\“—–\”$\'\’\"%\^&\*;:{}=\-_`~()0-9]/g, ' ').replace(/\s+/g, ' ').toLowerCase()
-            console.log(filteredText)
       var tags = filteredText.split(' ')
-      console.log(tags)
-      // let count = this.newCount
-      // console.log(count)
       this.$store.dispatch('gettags', tags)
-      // newtags = maxTags(filterTags(toTags(this.tags)))
     },
 
   },

@@ -18,6 +18,7 @@ function filterTags (tagArray) {
   var commontags = ['', 
   'a',  'an', 'and', 'as', 'are', 'at',
   'but', 'be', 'by',
+  'can',
   'don', 
   'every',
   'for', 
@@ -35,7 +36,7 @@ function filterTags (tagArray) {
     return !commontags.includes(tagObject.name)
   })
 }
-function maxTags (tagArray, c = count) {
+function maxTags (tagArray, c) {
   if (tagArray.length < 10) return tagArray
   tagArray = tagArray.filter(tagObject => {
     return tagObject.count > c 
@@ -51,7 +52,8 @@ export default new Vuex.Store({
  },
  mutations: {
   GET_TAGS (state, tags) {
-    tags = filterTags(toTags(tags))
+    var count = state.count
+    tags = maxTags(filterTags(toTags(tags)), count)
     state.tags = tags
   },
   INCREMENT (state) {
