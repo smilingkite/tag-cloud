@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <h2>Get  rid of unwanted tags</h2>
+  <div class="filtertags">
+    <h3>Get  rid of unwanted tags</h3>
     <p>Click submit to implement</p>
     <table class="filtertags">
 
@@ -19,7 +19,10 @@
   }
 </script>
 <style scoped>
-h2, p {
+.filtertags {
+  padding: 30px 0;
+}
+h3, p {
   text-align: center;
 }
 td {
