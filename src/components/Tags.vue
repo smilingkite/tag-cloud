@@ -1,15 +1,6 @@
 <template>
   <div>
-    <form method="post" v-on:submit="filterText">
-      <b-form-textarea id="textarea1"
-                      v-model="text"
-                      placeholder="Enter something"
-                      :rows="3"
-                      :max-rows="10"
-      >
-      </b-form-textarea>
-      <button class="button">submit</button>
-    </form>
+    <submitText></submitText>
     <incrementdecrement></incrementdecrement>
     
     <ul class="tags">
@@ -20,24 +11,11 @@
 
 <script>
 import incrementdecrement from './incrementdecrement'
+import submitText from './submitText'
 export default {
   components: {
-    incrementdecrement
-  },
-  data () {
-    return {
-      text: '',
-    }
-  },
-  methods: {
-      filterText(e) {
-      e.preventDefault();
-
-      var filteredText = this.text.replace(/[.,\/#!?\“—–\”$\'\’\"%\^&\*;:{}=\-_`~()0-9]/g, ' ').replace(/\s+/g, ' ').toLowerCase()
-      var tags = filteredText.split(' ')
-      this.$store.dispatch('gettags', tags)
-    },
-
+    incrementdecrement,
+    submitText
   },
   computed: {
     tags(){
