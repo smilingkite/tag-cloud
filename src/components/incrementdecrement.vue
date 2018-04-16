@@ -27,5 +27,9 @@
     margin: 1em auto;
     display:block 
   }
+  p {
+    text-align:center;
+    padding: 30px 0;
+  }
 
 </style>
