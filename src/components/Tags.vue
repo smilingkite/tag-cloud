@@ -10,7 +10,11 @@
       </b-form-textarea>
       <button class="button">submit</button>
     </form>
-    <p>Minimum amount of word usage # <button v-on:click.prevent="increment">+</button> {{ count }} <button v-on:click.prevent="decrement">-</button></p>
+    <p>Minimum amount of word usage # 
+      <button v-on:click="$store.dispatch('increment')">+</button>
+       {{ newCount }} 
+      <button v-on:click.prevent="$store.dispatch('decrement')">-</button>
+    </p>
     
     <ul class="tags">
       <li v-for="tag in tags" :key="tag.id" v-bind:style="{fontSize: 1 + tag.count/5  + 'em'}" > {{tag.name}} </li>
@@ -23,16 +27,16 @@ export default {
   data () {
     return {
       text: '',
-      tags: [],
-      count: 1,  
+      tags: [], 
     }
   },
   methods: {
-    filterText: function(e) {
+      filterText: function(e) {
       e.preventDefault();
       var filteredText = this.text.replace(/[.,\/#!?\“—–\”$\'\"%\^&\*;:{}=\-_`~()0-9]/g, ' ').replace(/\s+/g, ' ').toLowerCase()
       this.tags = filteredText.split(' ')
-      let count = this.count
+      let count = this.newCount
+      console.log(count)
       function toTags (array) {
         array.sort()
         var tagArray = Object.values(array.reduce((resultTagArr, tag) => {
@@ -40,7 +44,6 @@ export default {
             resultTagArr[tag] = {name: tag, count: 1}
             // gives array of named objects: tagName: {name: tag, count: 1}
           } else { resultTagArr[tag]['count'] += 1 }
-
           return resultTagArr
         }, {}))
         return tagArray
@@ -75,13 +78,11 @@ export default {
       }
       this.tags = maxTags(filterTags(toTags(this.tags)))
     },
-    increment () {
-      this.count++;
-    },
-    decrement () {
-      if(this.count > 0){
-        this.count-- ;
-      }
+
+  },
+  computed: {
+    newCount(){
+      return this.$store.getters.count
     }
   }
 }
