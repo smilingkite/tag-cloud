@@ -64,6 +64,9 @@ export default new Vuex.Store({
     if(state.count > 0){
       state.count-- ;
     }
+  },
+  FILTER_TAG (state, tag) {
+    state.commontags.push(tag)
   }
  },
  actions: {
@@ -75,6 +78,9 @@ export default new Vuex.Store({
   },
   decrement({commit},count){
     commit('DECREMENT', count)
+  },
+  filterTag({commit}, commontags){
+    commit('FILTER_TAG', commontags)
   }
  },
  getters: {

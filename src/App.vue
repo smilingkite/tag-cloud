@@ -3,6 +3,7 @@
     <submitText></submitText>
     <incrementdecrement></incrementdecrement>
     <Tags></Tags>
+    <filterTags></filterTags>
   </div>
 </template>
 
@@ -10,13 +11,15 @@
 import Tags from './components/Tags.vue'
 import incrementdecrement from './components/incrementdecrement'
 import submitText from './components/submitText'
+import filterTags from './components/filterTags'
 
 export default {
   name: 'app',
   components: {
     Tags,
     incrementdecrement,
-    submitText
+    submitText,
+    filterTags
   }
 }
 </script>
